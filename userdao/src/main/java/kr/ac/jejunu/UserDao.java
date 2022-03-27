@@ -2,10 +2,16 @@ package kr.ac.jejunu;
 
 import java.sql.*;
 
-public abstract class UserDao {
+public class UserDao {
+    private final ConnectionMaker connectionMaker;
+
+    public UserDao(ConnectionMaker connectionMaker){
+        this.connectionMaker=connectionMaker;
+    }
+
     public User findById(Integer id) throws ClassNotFoundException, SQLException {
 //        드라이버 로딩
-        Connection connection = getConnection();
+        Connection connection = connectionMaker.getConnection();
 //        sql 작성
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
@@ -30,7 +36,7 @@ public abstract class UserDao {
 
     public void insert(User user) throws ClassNotFoundException, SQLException {
 //        드라이버 로딩
-        Connection connection = getConnection();
+        Connection connection = connectionMaker.getConnection();
 //        sql 작성
         PreparedStatement preparedStatement =
                 connection.prepareStatement(
@@ -50,6 +56,4 @@ public abstract class UserDao {
         preparedStatement.close();
         connection.close();
     }
-
-    abstract public Connection getConnection() throws ClassNotFoundException, SQLException;
 }
