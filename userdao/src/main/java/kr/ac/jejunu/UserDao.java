@@ -5,8 +5,8 @@ import java.sql.*;
 public class UserDao {
     private final ConnectionMaker connectionMaker;
 
-    public UserDao(ConnectionMaker connectionMaker){
-        this.connectionMaker=connectionMaker;
+    public UserDao(ConnectionMaker connectionMaker) {
+        this.connectionMaker = connectionMaker;
     }
 
     public User findById(Integer id) throws ClassNotFoundException, SQLException {
@@ -44,7 +44,7 @@ public class UserDao {
                         Statement.RETURN_GENERATED_KEYS
                 );
         preparedStatement.setString(1, user.getName());
-        preparedStatement.setString(2,user.getPassword());
+        preparedStatement.setString(2, user.getPassword());
         preparedStatement.executeUpdate();
 //        sql 실행
         ResultSet resultSet = preparedStatement.getGeneratedKeys();
