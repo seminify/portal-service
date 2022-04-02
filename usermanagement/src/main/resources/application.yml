@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: seminify
+    password: Sm3979[]$
+    url: jdbc:mysql://localhost/jeju
