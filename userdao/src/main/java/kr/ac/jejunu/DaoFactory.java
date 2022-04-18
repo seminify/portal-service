@@ -3,6 +3,7 @@ package kr.ac.jejunu;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import javax.sql.DataSource;
@@ -21,21 +22,21 @@ public class DaoFactory {
 
     @Bean
     public UserDao userDao() throws ClassNotFoundException {
-        return new UserDao(jdbcContext());
+        return new UserDao(jdbcTemplate());
     }
 
     @Bean
-    public JdbcContext jdbcContext() throws ClassNotFoundException {
-        return new JdbcContext(dataSource());
+    public JdbcTemplate jdbcTemplate() throws ClassNotFoundException {
+        return new JdbcTemplate(dataSource());
     }
 
     @Bean
     public DataSource dataSource() throws ClassNotFoundException {
-        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-        dataSource.setDriverClass((Class<? extends Driver>) Class.forName(driverClassName));
-        dataSource.setUrl(url);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
-        return dataSource;
+        SimpleDriverDataSource simpleDriverDataSource = new SimpleDriverDataSource();
+        simpleDriverDataSource.setDriverClass((Class<? extends Driver>) Class.forName(driverClassName));
+        simpleDriverDataSource.setUrl(url);
+        simpleDriverDataSource.setUsername(username);
+        simpleDriverDataSource.setPassword(password);
+        return simpleDriverDataSource;
     }
 }
