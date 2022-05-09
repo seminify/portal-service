@@ -9,4 +9,10 @@ public class UserRequestListener implements ServletRequestListener {
         System.out.println("********* request listener ************");
         ServletRequestListener.super.requestInitialized(sre);
     }
+
+    @Override
+    public void requestDestroyed(ServletRequestEvent sre) {
+        System.out.println("********* request destroyed ************");
+        ServletRequestListener.super.requestDestroyed(sre);
+    }
 }

@@ -48,7 +48,8 @@ public class UserDaoTests {
         User user = User.builder().name("hulk").password("1111").build();
         userDao.insert(user);
 //        수정
-        user.builder().name(updatedName).password(updatedPassword).build();
+        user.setName(updatedName);
+        user.setPassword(updatedPassword);
         userDao.update(user);
         User updatedUser = userDao.findById(user.getId());
         assertThat(updatedUser.getName(), is(user.getName()));
